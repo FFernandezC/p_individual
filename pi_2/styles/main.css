@@ -1,16 +1,18 @@
 #title{
-	font-size: 26px;
-	line-height: 75px;
+	font-size: 2rem;
+	text-align: center;
+	line-height: 2rem;
 }
 
 .menu-object{
 	display:block;
-	margin-left: auto;
-	margin-right: auto;
+	font-size: 16px;
+	text-align: center;
+	margin: auto;
 	width: 300px;
 	height: 75px;
-	font-size: 16px;
-	margin-top: 10px;
+	
+	margin-top: 2rem;
 }
 
 p{
@@ -29,3 +31,18 @@ button.menu-object:hover:not(:active){
 	height: 85px;
 }
 
+.tauler{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  padding: 1rem;
+  border: 3px solid green;
+}
+
+.cartes{
+  display: grid;
+  grid-template-columns: repeat(4, 5rem);
+  grid-auto-rows: 7rem;
+  gap: 2rem;
+}
