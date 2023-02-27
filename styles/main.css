@@ -1,3 +1,7 @@
+body{
+	background-color: #E0F2F7;
+}
+
 h1, h2 {
   text-align: center;
   font-family: "Times New Roman";
@@ -11,7 +15,7 @@ p {
 .inici{
 	margin: auto;
 	width: 75%;
-	padding-top: 0.2rem;
+	padding-top: 0.1rem;
 }
 
 .llista_jocs{
@@ -22,5 +26,13 @@ p {
 }
 
 .boto{
-	
+	background-color: #A9D0F5;
+	color: black;
+	text-align: center;
+	font-size: 1.5rem;
+	text-decoration: none;
+	display: inline-block;
+	padding: 1rem 3rem 1rem 3rem;
+	border: 2rem;
+	border-radius: 25rem;	
 }
