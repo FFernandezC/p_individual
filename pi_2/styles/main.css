@@ -32,7 +32,6 @@ button.menu-object:hover:not(:active){
 }
 
 .tauler{
-  display: block;
   margin-left: auto;
   margin-right: auto;
   width: 20%;
