@@ -1,11 +1,10 @@
+/* Common element [Game menu | In game menu] */
+
 body{
-	background-color: #1C1C1C;
+	background-color: #2E2E2E;
 }
 
-#tile{
-	text-align: center;
-    font-family: "Times New Roman";
-}
+/* Elements from Game Menu */
 
 #logo{
 	display: block;
@@ -16,6 +15,7 @@ body{
 	display:block;
 	background-color: #0080FF;
 	border-radius: 2rem 2rem 2rem 2rem;
+	border-color: #FFFFFF;
 	font-size: 1.5rem;
 	text-align: center;
 	margin: auto;
@@ -30,7 +30,7 @@ p{
 }
 
 button.menu-object:active{
-	font-size: 1rem;
+	font-size: 1.6rem;
 	width: 27rem;
 	height: 5rem;
 }
@@ -39,14 +39,34 @@ button.menu-object:hover:not(:active){
 	font-size: 1.5rem;
 	width: 25rem;
 	height: 5rem;
+	box-shadow: 0 0 1rem #A9E2F3;
 }
 
-.tauler{
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-  padding: 1rem;
-  border: 1.5rem solid green;
+/* Elements in Game */
+
+#title{							
+	text-align: center;
+    font-family: "Times New Roman";
+	color: white;
+}
+
+.buton{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 3rem;
+	padding: 1rem 3rem;
+	width: 7rem;
+	background-color: #0080FF;
+	border-radius: 2rem 2rem 2rem 2rem;
+	text-align: center;
+	text-decoration: none;
+	font-size: 1.3rem;
+	color: white;
+}
+
+.buton:hover:not(.active){
+	background-color: #2E9AFE;
 }
 
 .cartes{
@@ -54,4 +74,9 @@ button.menu-object:hover:not(:active){
   grid-template-columns: repeat(4, 5rem);
   grid-auto-rows: 7rem;
   gap: 2rem;
+  justify-content: center;
+}
+
+.cartes img{
+	box-shadow: 0 0 1rem #A9E2F3;
 }
