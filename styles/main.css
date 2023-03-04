@@ -2,22 +2,34 @@ body{
 	background-color: #1C1C1C;
 }
 
-.header {
-  padding: 1rem;
-  text-align: center;
-  background: #2E2E2E;
-  color: white;
-  font-size: 1rem;
-}
-
 h1, h2 {
   text-align: center;
   font-family: "Times New Roman";
 }
 
 p {
-	text-align: center;
 	font-family: "Georgia";
+}
+
+.header {
+  padding: 1rem;
+  text-align: center;
+  background-image: url("../resources/header.png");
+  background-repeat: no-repeat;
+  background-size:cover;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 1rem #000000;
+}
+.description{
+	margin: auto;
+	width: 75%;
+}
+
+.body-web {
+	background-color: #E6E6E6;
+	height: 24rem;
 }
 
 ul {
@@ -25,7 +37,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #333333;
 }
 
 li {
@@ -38,6 +50,7 @@ li a {
   text-align: center;
   padding: 1rem 1rem;
   text-decoration: none;
+  font-size: 1.1rem;
 }
 
 li a:hover:not(.active) {
@@ -48,45 +61,36 @@ li a:hover:not(.active) {
   background-color: #04AA6D;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.inici{
-	margin: auto;
-	width: 75%;
-	padding-top: 0.1rem;
+.game{
+    display: flex;
+    margin: 1rem 0.1rem 1rem 0.1rem;
+    padding: 1rem 3rem 1rem 3rem;
+    background-color: #333333;
+    border-radius: 2rem 2rem 2rem 2rem;
+	color: white;
 }
 
-.llista_jocs{
-	margin: auto;
-	width: 50%;
-	text-align: center;
-	padding-top: 0.1rem;
+.game h3{
+  font-size: 1.5rem;
 }
 
-.boto{
-	background-color: #A9D0F5;
-	color: black;
-	text-align: center;
-	font-size: 1.5rem;
-	text-decoration: none;
-	display: inline-block;
-	padding: 1rem 3rem 1rem 3rem;
-	border: 2rem;
-	border-radius: 25rem;	
+.game img{
+    padding-right: 3rem;
+}
+
+.game a{
+  background-color: #0080FF;
+  border-radius: 2rem 2rem 2rem 2rem;
+  color: white;
+  padding: 1rem 3rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.4rem 0.2rem;
+  cursor: pointer;
+}
+
+.game a:hover:not(.active){
+	background-color: #2E9AFE;
 }
