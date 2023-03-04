@@ -31,7 +31,7 @@ p{
 
 .menu{
 	display: grid;
-	grid-template-columns: repeat(4, 5rem);
+	grid-template-columns: 1;
 	justify-content: center;
 }
 
