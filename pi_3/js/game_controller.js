@@ -9,7 +9,8 @@ var game = new Vue({
 		current_card: [],
 		items: [],
 		num_cards: 2,
-		bad_clicks: 0
+		bad_clicks: 0,
+		started_game:true
 	},
 	created: function(){
 		this.username = sessionStorage.getItem("username","unknown");
@@ -25,6 +26,13 @@ var game = new Vue({
 		this.items = this.items.slice(0, this.num_cards); // Agafem els primers numCards elements
 		this.items = this.items.concat(this.items); // Dupliquem els elements
 		this.items.sort(function(){return Math.random() - 0.5}); // Array aleatòria
+		
+		//Quan pasa 1 segon, les torna a posar a back
+			//setTimeout(() => {
+			//	console.log("prova")
+			//}, 1000);
+		//----------------------------------------------------------
+		
 		for (var i = 0; i < this.items.length; i++){
 			this.current_card.push({done: false, texture: back});
 		}
@@ -36,30 +44,36 @@ var game = new Vue({
 		}
 	},
 	watch: {
-		current_card: function(value){
-			if (value.texture === back) return;
-			var front = null;
-			var i_front = -1;
-			for (var i = 0; i < this.current_card.length; i++){
-				if (!this.current_card[i].done && this.current_card[i].texture !== back){
-					if (front){
-						if (front.texture === this.current_card[i].texture){
-							front.done = this.current_card[i].done = true;
-							this.num_cards--;
+			current_card: function(value){
+				
+				//Surt de la funció
+				if(this.started_game===false)return;
+				
+				if (value.texture === back) return;
+				var front = null;
+				var i_front = -1;
+				for (var i = 0; i < this.current_card.length; i++){
+					if (!this.current_card[i].done && this.current_card[i].texture !== back){
+						if (front){
+							if (front.texture === this.current_card[i].texture){
+								front.done = this.current_card[i].done = true;
+								this.num_cards--;
+								console.log("Gira 1");
+							}
+							else{
+								Vue.set(this.current_card, i, {done: false, texture: back});
+								Vue.set(this.current_card, i_front, {done: false, texture: back});
+								this.bad_clicks++;
+								console.log("Gira 2");
+								break;
+							}
 						}
 						else{
-							Vue.set(this.current_card, i, {done: false, texture: back});
-							Vue.set(this.current_card, i_front, {done: false, texture: back});
-							this.bad_clicks++;
-							break;
+							front = this.current_card[i];
+							i_front = i;
 						}
 					}
-					else{
-						front = this.current_card[i];
-						i_front = i;
-					}
-				}
-			}			
+				}			
 		}
 	},
 	computed: {
