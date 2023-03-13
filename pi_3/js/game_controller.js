@@ -80,6 +80,7 @@ var game = new Vue({
 		}
 	},
 	computed: {
+		//Calcul de la puntuació
 		score_text: function(){
 			return 100 - this.bad_clicks * 20;
 		}
