@@ -10,7 +10,7 @@ var game = new Vue({
 		items: [],
 		num_cards: 2,
 		bad_clicks: 0,
-		started_game:true
+		started_game:false
 	},
 	created: function(){
 		this.username = sessionStorage.getItem("username","unknown");
@@ -28,13 +28,16 @@ var game = new Vue({
 		this.items.sort(function(){return Math.random() - 0.5}); // Array aleatòria
 		
 		//Quan pasa 1 segon, les torna a posar a back
-			//setTimeout(() => {
-			//	console.log("prova")
-			//}, 1000);
+			setTimeout(() => {
+				console.log("temps!")
+				for (var i = 0; i < this.items.length; i++){
+					Vue.set(this.current_card, i, {done: false, texture: back});
+				}
+			}, 1000);
 		//----------------------------------------------------------
 		
 		for (var i = 0; i < this.items.length; i++){
-			this.current_card.push({done: false, texture: back});
+			this.current_card.push({done: false, texture: this.items[i]});
 		}
 	},
 	methods: {
