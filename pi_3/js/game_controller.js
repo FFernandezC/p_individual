@@ -10,6 +10,7 @@ var game = new Vue({
 		items: [],
 		num_cards: 2,
 		bad_clicks: 0,
+		game_dificulty: '',
 		started_game:false
 	},
 	created: function(){
@@ -19,22 +20,55 @@ var game = new Vue({
 		//Recuperem els valors de "config" i el pasem json a objecte
 		var json = localStorage.getItem("config") || '{"cards":2,"dificulty":"hard"}';
 		var options_data = JSON.parse(json);
-		this.num_cards=options_data.cards;
+		this.num_cards = options_data.cards;
+		this.game_dificulty = options_data.dificulty;
 		
-		//----------------------------------------------------------
+		
 		
 		this.items.sort(function(){return Math.random() - 0.5}); // Array aleatòria
 		this.items = this.items.slice(0, this.num_cards); // Agafem els primers numCards elements
 		this.items = this.items.concat(this.items); // Dupliquem els elements
 		this.items.sort(function(){return Math.random() - 0.5}); // Array aleatòria
 		
-		//Quan pasa 1 segon, les torna a posar a back
-			setTimeout(() => {
+		//----------------------------------------------------------
+		
+		//Temps ambles cartes girades segons dificultat
+		
+			if(this.game_dificulty === "easy"){ //3 segons amb les cartes visibles
+				
+				setTimeout(() => {
 				for (var i = 0; i < this.items.length; i++){
 					Vue.set(this.current_card, i, {done: false, texture: back});
 				}
+				
 				this.started_game = true;
-			}, 1000);
+				
+				}, 3000);
+			
+			}else if(this.game_dificulty === "normal"){ //2 segons amb les cartes visibles
+
+				setTimeout(() => {
+				for (var i = 0; i < this.items.length; i++){
+					Vue.set(this.current_card, i, {done: false, texture: back});
+				}
+				
+				this.started_game = true;
+				
+				}, 2000);
+			
+			}else if(this.game_dificulty === "hard"){ //1 segons amb les cartes visibles
+
+				setTimeout(() => {
+				for (var i = 0; i < this.items.length; i++){
+					Vue.set(this.current_card, i, {done: false, texture: back});
+				}
+				
+				this.started_game = true;
+				
+				}, 1000);
+			
+			}
+
 		//----------------------------------------------------------
 		
 		for (var i = 0; i < this.items.length; i++){
@@ -51,41 +85,58 @@ var game = new Vue({
 		
 		current_card: function(value){
 				
-				//Surt de la funció
-				if(this.started_game === false){
-					return;
-				}
-				else{				
-					if (value.texture === back) return;
-					var front = null;
-					var i_front = -1;
-					for (var i = 0; i < this.current_card.length; i++){
-						if (!this.current_card[i].done && this.current_card[i].texture !== back){
-							if (front){
-								if (front.texture === this.current_card[i].texture){
-									front.done = this.current_card[i].done = true;
-									this.num_cards--;
-								}
-								else{
-									Vue.set(this.current_card, i, {done: false, texture: back});
-									Vue.set(this.current_card, i_front, {done: false, texture: back});
-									this.bad_clicks++;
-									break;
-								}
+			//Surt de la funció
+			if(this.started_game === false){
+				return;
+			}
+			else{				
+				if (value.texture === back) return;
+				var front = null;
+				var i_front = -1;
+				for (var i = 0; i < this.current_card.length; i++){
+					if (!this.current_card[i].done && this.current_card[i].texture !== back){
+						if (front){					
+							if (front.texture === this.current_card[i].texture){
+								front.done = this.current_card[i].done = true;
+								this.num_cards--;
 							}
 							else{
-								front = this.current_card[i];
-								i_front = i;
+								if(!front){
+									Vue.set(this.current_card, i_front, {done: false, texture: this.items[i]});
+								}
+
+								setTimeout(() => {
+									Vue.set(this.current_card, i, {done: false, texture: back});
+									Vue.set(this.current_card, i_front, {done: false, texture: back});
+								}, 1000);
+
+								this.bad_clicks++;
+								break;
 							}
 						}
+						else{
+							front = this.current_card[i];
+							i_front = i;
+						}
 					}
-				}			
+				}
+			}			
 		}
 	},
 	computed: {
 		//Calcul de la puntuació
 		score_text: function(){
-			return 100 - this.bad_clicks * 20;
+			
+			let score_game = 0;
+			
+			if(this.game_dificulty === "easy"){
+				score_game = 100 - this.bad_clicks * 10;
+			}else if(this.game_dificulty === "normal"){
+				score_game = 100 - this.bad_clicks * 20;
+			}else if(this.game_dificulty === "hard"){
+				score_game = 100 - this.bad_clicks * 40;
+			}
+			return score_game;
 		}
 	}
 });
