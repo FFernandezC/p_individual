@@ -43,7 +43,7 @@ var game = new Vue({
 				
 				this.started_game = true;
 				
-				}, 3000);
+				}, 3000); //Temps que tarda en girarse les cartes en dificultat "easy" [3seg]
 			
 			}else if(this.game_dificulty === "normal"){ //2 segons amb les cartes visibles
 
@@ -54,7 +54,7 @@ var game = new Vue({
 				
 				this.started_game = true;
 				
-				}, 2000);
+				}, 2000); //Temps que tarda en girarse les cartes en dificultat "easy" [2seg]
 			
 			}else if(this.game_dificulty === "hard"){ //1 segons amb les cartes visibles
 
@@ -65,7 +65,7 @@ var game = new Vue({
 				
 				this.started_game = true;
 				
-				}, 1000);
+				}, 1000); //Temps que tarda en girarse les cartes en dificultat "easy" [1seg]
 			
 			}
 
@@ -101,6 +101,8 @@ var game = new Vue({
 								this.num_cards--;
 							}
 							else{
+								
+								//Mantenir la carta en "front" durante un segon per a que l'usuari vegi l'error
 								if(!front){
 									Vue.set(this.current_card, i_front, {done: false, texture: this.items[i]});
 								}
@@ -130,11 +132,11 @@ var game = new Vue({
 			let score_game = 0;
 			
 			if(this.game_dificulty === "easy"){
-				score_game = 100 - this.bad_clicks * 10;
+				score_game = 100 - this.bad_clicks * 10;	//Puns que es perden en dificultat "easy"
 			}else if(this.game_dificulty === "normal"){
-				score_game = 100 - this.bad_clicks * 20;
+				score_game = 100 - this.bad_clicks * 20;	//Puns que es perden en dificultat "normal"
 			}else if(this.game_dificulty === "hard"){
-				score_game = 100 - this.bad_clicks * 40;
+				score_game = 100 - this.bad_clicks * 40;	//Puns que es perden en dificultat "hard"
 			}
 			return score_game;
 		}
