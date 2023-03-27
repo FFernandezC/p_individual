@@ -1,5 +1,8 @@
 function start_game(){
 	name = prompt("User name");
+	
+	sessionStorage.setItem("username", name);
+	
 	loadpage("./html/game.html");
 }
 
@@ -8,11 +11,12 @@ function exit (){
 		alert("Leaving " + name + "'s game");
 	}
 	name = "";
+	//Sortir al index.html principal
+	loadpage("../index.html");
 }
 
 function options(){
-	// TODO: Open options menu
-	console.log("Options menu button");
+	loadpage("./html/options.html");
 }
 
 
