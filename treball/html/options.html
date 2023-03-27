@@ -6,14 +6,21 @@
 		<title> My first game - Options </title>
 	</head>
 	<body>
-		<div id="options_id">
-			<p class="menu-object" id="title">Options menú</p>
-			<div class="menu-object">
+		
+		<h1 class="title">Options menú</h1>
+		
+		<div class="options_id">
+			
+			<div class="cardsOpt">
+
+				<p class="cardsOpt_Title">Cards</p>
 				<label for="labelnumber">Number of cards:</label>
 				<input type="number" id="labelnumber" v-model="num">
 			</div>
-			<div class="menu-object">
-				<p>Dificulty:</p>
+
+			<div class="dificultyOpt">
+
+				<p class="dificultyOpt_Title">Dificulty</p>
 				<input type="radio" id="easy" value="easy" v-model="dificulty" checked>
 				<label for="easy">Easy</label>
 				<input type="radio" id="normal" value="normal" v-model="dificulty" >
@@ -21,6 +28,18 @@
 				<input type="radio" id="hard" value="hard" v-model="dificulty" >
 				<label for="hard">Hard</label>
 			</div>
+
+			<div class="modeOpt">
+
+				<p class="modeOpt_Title">Mode</p>
+				<input type="radio" id="mode_easy" value="mode_easy" v-model="mode" checked>
+				<label for="mode_easy">Easy</label>
+				<input type="radio" id="mode_normal" value="mode_normal" v-model="mode" >
+				<label for="mode_normal">Normal</label>
+				<input type="radio" id="mode_hard" value="mode_hard" v-model="mode" >
+				<label for="mode_hard">Hard</label>
+			</div>
+
 			<button class="menu-object" v-on:click="save"> Save </button>
 			<button class="menu-object" v-on:click="discard"> Discard </button>
 		</div>

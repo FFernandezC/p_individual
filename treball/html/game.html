@@ -2,21 +2,20 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="../styles/main.css">
-		<link rel="icon" type="image/x-icon" href="../../resources/MemoryGame.png">
-		<script src="../js/game_controller.js"></script>
 		<script src="../js/loader.js"></script>
-		<title>MemoryGame</title>
+		<title> My first game - Game </title>
 	</head>
 	<body>
-		<h1 id="title">&#127924; Memory game</h1>
-
-			<div class="cartes">
-				<img src="../resources/cb.png" onclick="items[0].do_click()">
-				<img src="../resources/tb.png" onclick="items[1].do_click()">
-				<img src="../resources/tb.png" onclick="items[2].do_click()">
-				<img src="../resources/cb.png" onclick="items[3].do_click()">
-			</div>
-
-		<a class="buton" href="../">GoToMenu</a>
+		<div id="game_id">
+			<p class="menu-object" id="title">Is playing {{username}}</p>
+			<p class="menu-object" id="title" v-if="score_text <= 0"> You Lose </p>
+			<p class="menu-object" id="title" v-else-if="num_cards <= 0">
+				You WIN!!! with {{score_text}} points
+			</p>
+			<img v-else v-for="(card, indx) in current_card" :src="card.texture" v-on:click="clickCard(indx)">
+		</div>
+		<a class="menu-object" href="../">GoToMenu</a>
 	</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+	<script src="../js/game_controller.js"></script>
 </html>

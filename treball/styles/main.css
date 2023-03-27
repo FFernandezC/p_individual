@@ -75,7 +75,7 @@ button.menu-object:hover:not(:active){
 	background-color: #2E9AFE;
 }
 
-.cartes{
+#game_id{
   display: grid;
   grid-template-columns: repeat(4, 5rem);
   grid-auto-rows: 7rem;
@@ -83,6 +83,6 @@ button.menu-object:hover:not(:active){
   justify-content: center;
 }
 
-.cartes img{
+#game_id img{
 	box-shadow: 0 0 1rem #A9E2F3;
 }

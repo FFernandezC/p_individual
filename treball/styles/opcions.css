@@ -1,19 +1,68 @@
-/* Common element [Game menu | In game menu] */
+/* MAIN ELEMENTS  */
 
 body{
 	background-color: #2E2E2E;
 }
 
-p{
+.title{							
+    font-family: "Times New Roman";
+	font-size: 3rem;
+	color: white;
+	text-decoration: underline;
 	text-align: center;
+	margin-bottom: 1rem;
 }
 
-/* Elements from Game Menu */
+/* GAME MENU ELEMENTS */
 
-#logo{
-	display: block;
-	margin: auto;
+.options_id{
+	display: grid;
+	grid-template-columns: 1;
+	justify-content: center;
 }
+
+/*--- SECTIONS ---*/
+
+.cardsOpt_Title{
+	text-decoration: underline;
+}
+
+.dificultyOpt_Title{
+	text-decoration: underline;
+}
+
+.modeOpt_Title{
+	text-decoration: underline;
+}
+
+.cardsOpt{
+	text-align: center;
+    font-family: "Times New Roman";
+	font-size: 1.5rem;
+	color: white;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.dificultyOpt{
+	text-align: center;
+    font-family: "Times New Roman";
+	font-size: 1.5rem;
+	color: white;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.modeOpt{
+	text-align: center;
+    font-family: "Times New Roman";
+	font-size: 1.5rem;
+	color: white;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+/*--- BUTTONS ---*/
 
 .menu-object{
 	display:block;
@@ -29,12 +78,6 @@ p{
 	margin-top: 2rem;
 }
 
-.menu{
-	display: grid;
-	grid-template-columns: 1;
-	justify-content: center;
-}
-
 button.menu-object:active{
 	font-size: 1.6rem;
 	width: 27rem;
@@ -45,44 +88,5 @@ button.menu-object:hover:not(:active){
 	font-size: 1.5rem;
 	width: 25rem;
 	height: 5rem;
-	box-shadow: 0 0 1rem #A9E2F3;
-}
-
-/* Elements in Game */
-
-#title{							
-	text-align: center;
-    font-family: "Times New Roman";
-	color: white;
-}
-
-.buton{
-	display:block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 3rem;
-	padding: 1rem 3rem;
-	width: 7rem;
-	background-color: #0080FF;
-	border-radius: 2rem 2rem 2rem 2rem;
-	text-align: center;
-	text-decoration: none;
-	font-size: 1.3rem;
-	color: white;
-}
-
-.buton:hover:not(.active){
-	background-color: #2E9AFE;
-}
-
-.cartes{
-  display: grid;
-  grid-template-columns: repeat(4, 5rem);
-  grid-auto-rows: 7rem;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.cartes img{
 	box-shadow: 0 0 1rem #A9E2F3;
 }
