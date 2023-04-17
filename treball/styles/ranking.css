@@ -1,18 +1,7 @@
-/* Common element [Game menu | In game menu] */
+/* CSS Ranking */
 
 body{
 	background-color: #2e2e2e;
-}
-
-p{
-	text-align: center;
-}
-
-/* Elements from Game Menu */
-
-#logo{
-	display: block;
-	margin: auto;
 }
 
 #title{					
@@ -22,21 +11,23 @@ p{
 	color: white;
 }
 
-/*.menu-object{
-	display:grid;
-	grid-template-columns: 2;
-	justify-content: center;
+
+
+/*--- BUTTONS ---*/
+
+.menu-object{
+	display:block;
 	background-color: #0080FF;
 	border-radius: 2rem 2rem 2rem 2rem;
 	border-color: #FFFFFF;
 	font-size: 1.5rem;
 	text-align: center;
 	margin: auto;
-	width: 30rem;s
+	width: 30rem;
 	height: 4rem;
 	color: white;
 	margin-top: 2rem;
-}*/
+}
 
 button.menu-object:active{
 	font-size: 1.6rem;
@@ -48,19 +39,5 @@ button.menu-object:hover:not(:active){
 	font-size: 1.5rem;
 	width: 25rem;
 	height: 5rem;
-	box-shadow: 0 0 1rem #A9E2F3;
-}
-
-/* Elements in Game */
-
-#game_id{
-  display: grid;
-  grid-template-columns: repeat(4, 5rem);
-  grid-auto-rows: 7rem;
-  gap: 2rem;
-  justify-content: center;
-}
-
-#game_id img{
 	box-shadow: 0 0 1rem #A9E2F3;
 }

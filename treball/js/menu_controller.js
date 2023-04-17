@@ -6,7 +6,15 @@ function start_game(){
 	loadpage("./html/game.html");
 }
 
-function exit (){
+function rankingScore(){
+	loadpage("./html/ranking.html");
+}
+
+function options(){
+	loadpage("./html/options.html");
+}
+
+function exit(){
 	if (name != ""){
 		alert("Leaving " + name + "'s game");
 	}
@@ -15,8 +23,6 @@ function exit (){
 	loadpage("../index.html");
 }
 
-function options(){
-	loadpage("./html/options.html");
-}
+
 
 
