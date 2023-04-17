@@ -34,12 +34,12 @@ var options = function(){
 			}
 		},
 		methods: { 
-			discard: function(){
+			discard: function(){		//Acció quan premem "DISCARD"
 				this.num = options_data.cards;
 				this.dificulty = options_data.dificulty;
 				this.mode_2 = options_data.mode_2;
 			},
-			save: function(){
+			save: function(){		//Acció quan premem "SAVE"
 				options_data.cards = this.num;
 				options_data.dificulty = this.dificulty;
 				options_data.mode_2 = this.mode_2;
@@ -61,11 +61,13 @@ var options = function(){
 		}
 	}; 
 }();
+
 /*
 console.log(options.getOptionsString());
 console.log(options.getNumOfCards());
 console.log(options.getDificulty());
-console.log(options.options_data);*/
+console.log(options.options_data);
+*/
 
 
 
