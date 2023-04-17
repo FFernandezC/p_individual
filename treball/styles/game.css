@@ -15,8 +15,15 @@ p{
 	margin: auto;
 }
 
-.menu-object{
-	display:block;
+#title{					
+	display: block;		
+	text-align: center;
+    font-family: "Times New Roman";
+	color: white;
+}
+
+/*.menu-object{
+	display:grid;
 	grid-template-columns: 2;
 	justify-content: center;
 	background-color: #0080FF;
@@ -25,17 +32,11 @@ p{
 	font-size: 1.5rem;
 	text-align: center;
 	margin: auto;
-	width: 30rem;
+	width: 30rem;s
 	height: 4rem;
 	color: white;
 	margin-top: 2rem;
-}
-
-.menu{
-	display: grid;
-	grid-template-columns: 1;
-	justify-content: center;
-}
+}*/
 
 button.menu-object:active{
 	font-size: 1.6rem;
@@ -51,32 +52,6 @@ button.menu-object:hover:not(:active){
 }
 
 /* Elements in Game */
-
-#title{					
-	display: block;		
-	text-align: center;
-    font-family: "Times New Roman";
-	color: white;
-}
-
-.buton{
-	display:block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 3rem;
-	padding: 1rem 3rem;
-	width: 7rem;
-	background-color: #0080FF;
-	border-radius: 2rem 2rem 2rem 2rem;
-	text-align: center;
-	text-decoration: none;
-	font-size: 1.3rem;
-	color: white;
-}
-
-.buton:hover:not(.active){
-	background-color: #2E9AFE;
-}
 
 #game_id{
   display: grid;
