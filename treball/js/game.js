@@ -3,6 +3,8 @@ class GameScene extends Phaser.Scene{
         super('GameScene')
         this.cards = null;
         this.firstClick = null;
+        this.score = 100;
+        this.correct = 0;
     }
 
     preload () {
@@ -38,6 +40,29 @@ class GameScene extends Phaser.Scene{
             card.on('pointerup', function() {
                 console.log(card.card_id);
                 card.disableBody(true, true);
+
+                if (this.firstClick){
+                    if (this.firstClick.card_id !== card.card_id){
+                        this.firstClick.enableBody(false, 0, 0, true, true);
+                        card.enableBody(false, 0, 0, true, true);
+                        if (this.score <= 0){
+                            alert("Game Over");
+                            loadpage("../")
+                        }
+                    }
+                    else{
+                        this.correct++;
+                        if (this.correct >= 2){
+                            alert("You Win with " + this.score + " points.");
+                            loadpage("../")
+                        }
+                    }
+                    this.firstClick = null;
+                }else{
+                    this.firstClick = card;
+                }
+
+
             }, card);
         });
     }

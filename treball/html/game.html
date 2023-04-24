@@ -3,6 +3,7 @@
 	<head>
 		<link rel="stylesheet" href="../styles/main.css">
 		<script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+		<script src="../js/loader.js"></script>
 		<script src="../js/game.js"></script>
 		<script src="../js/phasergame_controller.js"></script>
 		<title> Memory Game </title>
@@ -13,10 +14,10 @@
 		<p class="jugador">Is playing {{username}}</p>
 
 		<div id="game_area">
+			<!--
 			<p class="menu-object" v-if="score_text <= 0"> You Lose </p>
-			<p class="menu-object" v-else-if="num_cards <= 0">
-				You WIN!!! with {{score_text}} points
-			</p>
+			<p class="menu-object" v-else-if="num_cards <= 0">You WIN!!! with {{score_text}} points</p>
+			-->
 			<img v-else v-for="(card, indx) in current_card" :src="card.texture" v-on:click="clickCard(indx)">
 		</div>
 		<a class="buton" href="../">Tornar</a>
