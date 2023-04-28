@@ -23,6 +23,9 @@ class GameScene extends Phaser.Scene{
     }
     create () {
 
+        // Posem el fons d'un color blau cel
+        this.cameras.main.setBackgroundColor(0xBFFCFF)
+
         // Recuperem els valors de "config" [Opcions] i extreiem les dades
 		var json = localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}';
 		var options_data = JSON.parse(json);
@@ -39,17 +42,29 @@ class GameScene extends Phaser.Scene{
         TexturesCartas[4]='tb';
         TexturesCartas[5]='to';
 
-        // Barejem l'Array de les cartes
-        this.cards_play.sort(function(){return Math.random() - 0.5});   // Array aleatòria
-		this.cards_play = this.cards_play.slice(0, this.num_cards);     // Agafem els primers numCards elements
-		this.cards_play = this.cards_play.concat(this.cards_play);      // Dupliquem els elements
-		this.cards_play.sort(function(){return Math.random() - 0.5});   // Array aleatòria
+        // Inicialitzem valors [ID_textura] a l'Array "cards_play" (tants com num_cards tenim)
+        for(var a=0;a<=this.num_cards;a++){
+            this.cards_play[a]=a;
+            console.log(this.cards_play[a]);
+        }
 
-        // Fem una Array amb el numero de cartes
-        this.cameras.main.setBackgroundColor(0xBFFCFF)
+        // Barejem les dades dins de l'Array "cards_play"
+        this.cards_play.sort(function(){return Math.random() - 0.5}); // Array aleatòria
+		this.cards_play = this.cards_play.slice(0, this.num_cards);   // Agafem els primers numCards elements
+		this.cards_play = this.cards_play.concat(this.cards_play);    // Dupliquem els elements
+		this.cards_play.sort(function(){return Math.random() - 0.5}); // Array aleatòria
 
+        // Valors per dfecte de posició
         var pixels_x = 200;
         var pixels_y = 300;
+        var m = 0;
+        var trobat = false;
+
+        while(m < num_cards*2){     //Revisar
+
+            this.add.image(pixels_x+50, pixels_y,TexturesCartas[this.cards_play[m]]);
+            m += 1;
+        }
 
         this.cards_play = this.physics.add.staticGroup()
 
@@ -68,11 +83,6 @@ class GameScene extends Phaser.Scene{
         for(i=0;i<this.num_cards*2;i++){
             this.cards.create(pixels_x, pixels_y, 'back');
         }
-
-        this.add.image(250, 300, 'co');
-        this.add.image(350, 300, 'sb');
-        this.add.image(450, 300, 'co');
-        this.add.image(550, 300, 'sb');
 
         let i = 0;
         this.cards.children.iterate((card)=>{
