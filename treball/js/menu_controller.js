@@ -1,3 +1,5 @@
+"use strict";
+
 function phaser_game(){
 	loadpage("./html/game.html");
 }
