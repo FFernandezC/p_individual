@@ -16,19 +16,20 @@ class GameScene extends Phaser.Scene{
         this.load.image('to', '../resources/to.png');
     }
     create () {
+        let arraycards = ['co','sb','co','sb'];
         this.cameras.main.setBackgroundColor(0xBFFCFF)
 
         this.add.image(250, 300, 'co');
-        this.add.image(250, 300, 'sb');
-        this.add.image(250, 300, 'co');
-        this.add.image(250, 300, 'sb');
+        this.add.image(350, 300, 'sb');
+        this.add.image(450, 300, 'co');
+        this.add.image(550, 300, 'sb');
 
         this.cards = this.physics.add.staticGroup()
 
         this.cards.create(250, 300, 'back');
-        this.cards.create(250, 300, 'back');
-        this.cards.create(250, 300, 'back');
-        this.cards.create(250, 300, 'back');
+        this.cards.create(350, 300, 'back');
+        this.cards.create(450, 300, 'back');
+        this.cards.create(550, 300, 'back');
 
         let i = 0;
         this.cards.children.iterate((card)=>{
@@ -40,7 +41,10 @@ class GameScene extends Phaser.Scene{
                 card.disableBody(true, true);
 
                 if (this.firstClick){
+                    console-log("A fet clic")
                     if (this.firstClick.card_id !== card.card_id){
+                        this.score -= 20;
+                        console.log(this.score);
                         this.firstClick.enableBody(false, 0, 0, true, true);
                         card.enableBody(false, 0, 0, true, true);
                         if (this.score <= 0){
@@ -51,15 +55,15 @@ class GameScene extends Phaser.Scene{
                     else{
                         this.correct++;
                         if (this.correct >= 2){
+                            console.log(this.correct);
                             alert("You Win with " + this.score + " points.");
                             loadpage("../")
                         }
                     }
                     this.firstClick = null;
                 }else{
-                    this.firstClick = card;
+                    this.firstClick = cards;
                 }
-
 
             }, card);
         });
