@@ -6,19 +6,17 @@ class GameScene extends Phaser.Scene{
         this.score = 100;
         this.correct = 0;
     }
-
     preload () {
-        this.preload.image('back', '../resources/back.png');
-        this.preload.image('cb', '../resources/cb.png');
-        this.preload.image('co', '../resources/co.png');
-        this.preload.image('sb', '../resources/sb.png');
-        this.preload.image('so', '../resources/so.png');
-        this.preload.image('tb', '../resources/tb.png');
-        this.preload.image('to', '../resources/to.png');
+        this.load.image('back', '../resources/back.png');
+        this.load.image('cb', '../resources/cb.png');
+        this.load.image('co', '../resources/co.png');
+        this.load.image('sb', '../resources/sb.png');
+        this.load.image('so', '../resources/so.png');
+        this.load.image('tb', '../resources/tb.png');
+        this.load.image('to', '../resources/to.png');
     }
-
     create () {
-        this.cameras.main.setBackgroundcolor(0xBFFCFF)
+        this.cameras.main.setBackgroundColor(0xBFFCFF)
 
         this.add.image(250, 300, 'co');
         this.add.image(250, 300, 'sb');
@@ -66,6 +64,4 @@ class GameScene extends Phaser.Scene{
             }, card);
         });
     }
-
-    update () {}
 }
