@@ -55,11 +55,17 @@ button.menu-object:hover:not(:active){
 	color: white;
 }
 
+.game_area{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .buton{
 	display:block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 3rem;
+	margin-top: 0.5rem;
 	padding: 1rem 3rem;
 	width: 7rem;
 	background-color: #0080FF;

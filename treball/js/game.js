@@ -3,14 +3,12 @@
 class GameScene extends Phaser.Scene{
     constructor () {
         super('GameScene')
-        this.game_dificulty = '';
-        this.game_mode = '';
-        this.num_cards = 0;
         this.cards = null;
         this.firstClick = null;
         this.score = 100;
         this.correct = 0;
-        this.cards_play = [];
+        this.name = prompt("Username") || "[ ]";
+		this.options_data = JSON.parse(localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}');
     }
     preload () {
         this.load.image('back', '../resources/back.png');
@@ -23,37 +21,20 @@ class GameScene extends Phaser.Scene{
     }
     create () {
 
-        // Posem el fons d'un color blau cel
-        this.cameras.main.setBackgroundColor(0xBFFCFF)
+        /* Array of shuffled cards and background color */
+        let arraycards = ['cb','co','sb','so','tb','to'];
+        let mixed_array = Phaser.Utils.Array.Shuffle(arraycards);
+        //[I]: Inforation of [Phaser.Utils.Array.Shuffle] in: https://newdocs.phaser.io/docs/3.55.2/focus/Phaser.Utils.Array.Shuffle
+        console.log(mixed_array);
+        this.cameras.main.setBackgroundColor(0xBFFCFF);
 
-        // Recuperem els valors de "config" [Opcions] i extreiem les dades
-		var json = localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}';
-		var options_data = JSON.parse(json);
-		this.num_cards = options_data.cards;
-		this.game_dificulty = options_data.dificulty;
-        this.game_mode = options_data.mode_2;
+        this.add.text(25, 50, "Is playing: " + this.name, {fontFamily: 'Brush Script MT', fontSize: '25px', fill: '#000'});
+        this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'Brush Script MT', fontSize: '25px', fill: '#000'});
+        //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
 
-        // Creem una "Array" de textures amb el nom de cada imatge 
-        var TexturesCartas = [];
-        TexturesCartas[0]='cb';
-        TexturesCartas[1]='co';
-        TexturesCartas[2]='sb';
-        TexturesCartas[3]='so';
-        TexturesCartas[4]='tb';
-        TexturesCartas[5]='to';
-
-        // Inicialitzem valors [ID_textura] a l'Array "cards_play" (tants com num_cards tenim)
-        for(var a=0;a<=this.num_cards;a++){
-            this.cards_play[a]=a;
-            console.log(this.cards_play[a]);
-        }
-
-        // Barejem les dades dins de l'Array "cards_play"
-        this.cards_play.sort(function(){return Math.random() - 0.5}); // Array aleatòria
-		this.cards_play = this.cards_play.slice(0, this.num_cards);   // Agafem els primers numCards elements
-		this.cards_play = this.cards_play.concat(this.cards_play);    // Dupliquem els elements
-		this.cards_play.sort(function(){return Math.random() - 0.5}); // Array aleatòria
-
+        // Cards Physics are static
+        this.cards_play = this.physics.add.staticGroup()
+        
         // Valors per dfecte de posició
         var pixels_x = 200;
         var pixels_y = 300;
@@ -66,7 +47,7 @@ class GameScene extends Phaser.Scene{
             m += 1;
         }
 
-        this.cards_play = this.physics.add.staticGroup()
+        
 
         // Mostrem lse cartes segons la dificultat
         if(this.game_dificulty === "easy"){ // 3 segons visibles
