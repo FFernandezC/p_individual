@@ -34,6 +34,13 @@ class GameScene extends Phaser.Scene{
 
         // Cards Physics are static
         this.cards_play = this.physics.add.staticGroup()
+
+        
+
+
+
+
+
         
         // Valors per dfecte de posició
         var pixels_x = 200;

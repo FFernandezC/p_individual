@@ -10,6 +10,8 @@ var config = {
 			debug: false
 		}
 	},
+	scale: {autoCenter: Phaser.Scale.CENTER_BOTH},
+	//[I]: Inforation of [Phaser.Scale.CENTER_BOTH] in: https://photonstorm.github.io/phaser3-docs/Phaser.Scale.html
     scene: [ GameScene ]
 };
 
