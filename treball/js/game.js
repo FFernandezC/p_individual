@@ -39,36 +39,8 @@ class GameScene extends Phaser.Scene{
         this.cards_play = this.physics.add.staticGroup()
 
 
-        // Valors per dfecte de posició
-        var pixels_x = 200;
-        var pixels_y = 300;
-        var m = 0;
-        var trobat = false;
 
-        while(m < num_cards*2){     //Revisar
-
-            this.add.image(pixels_x+50, pixels_y,TexturesCartas[this.cards_play[m]]);
-            m += 1;
-        }
-
-        
-
-        // Mostrem lse cartes segons la dificultat
-        if(this.game_dificulty === "easy"){ // 3 segons visibles
-
-
-        }else if(this.game_dificulty === "normal"){// 2 segons visibles
-
-
-        }else if(this.game_dificulty === "hard"){// 1 segons visibles
-
-
-        }
-
-        for(i=0;i<this.num_cards*2;i++){
-            this.cards.create(pixels_x, pixels_y, 'back');
-        }
-
+        // Gameplay of the game [clicks, loose, win and score]
         let i = 0;
         this.cards.children.iterate((card)=>{
             card.card_id = this.cards_play[i];
