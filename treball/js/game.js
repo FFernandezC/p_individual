@@ -32,16 +32,13 @@ class GameScene extends Phaser.Scene{
         this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'Brush Script MT', fontSize: '25px', fill: '#000'});
         //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
 
+
+
+
         // Cards Physics are static
         this.cards_play = this.physics.add.staticGroup()
 
-        
 
-
-
-
-
-        
         // Valors per dfecte de posició
         var pixels_x = 200;
         var pixels_y = 300;
@@ -81,14 +78,14 @@ class GameScene extends Phaser.Scene{
                 card.disableBody(true, true);
 
                 if (this.firstClick){
-                    console.log("A fet clic");
                     if (this.firstClick.card_id !== card.card_id){
                         this.score -= 20;
-                        console.log(this.score);
+                        Textsc.setText('Score: ' + this.score);
                         this.firstClick.enableBody(false, 0, 0, true, true);
                         card.enableBody(false, 0, 0, true, true);
                         if (this.score <= 0){
                             alert("Game Over");
+                            Textsc.setText('Score: 0')
                             loadpage("../")
                         }
                     }
