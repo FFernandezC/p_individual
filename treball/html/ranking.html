@@ -8,7 +8,7 @@
 	<body>
 		<h1 id="title">&#127924; Ranking &#127924;</h1>
 
-        <div id="taula">
+        <div id="scores">
 
             <table class="table table-bordered">
 				<thead>
@@ -18,8 +18,9 @@
 					</th>
 				</thead>
 				
-				<tr v-for="score in p_scores[0]">
-					<td v-for="infScore">{{p_scores[score]}}</td>
+				<tr v-for="score in p_scores">
+					<td>{{score.NomPlayer}}</td>
+					<td>{{score.ScorePlayer}}</td>
 				</tr>
 			</table>
 

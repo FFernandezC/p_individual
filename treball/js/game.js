@@ -120,6 +120,16 @@ class GameScene extends Phaser.Scene{
                                 this.correct++;
                                 if (this.correct >= this.options_data.cards){
                                     card.disableBody(true, true);
+
+                                    var DataRanking = {
+                                        NomPlayer: this.name,
+                                        ScorePlayer: this.score
+                                    };
+                                    var arraytemp = JSON.parse(localStorage.ranking);
+                                    if(!Array.isArray(arraytemp)){arraytemp = [];}
+                                    arraytemp.push(DataRanking);
+                                    localStorage.ranking = JSON.stringify(arraytemp);
+
                                     setTimeout(() => {
                                         alert("You Win with " + this.score + " points.");
                                         loadpage("../")
