@@ -1,4 +1,5 @@
 "use strict";
+
 var json = localStorage.getItem("scoresJSON");
 var options_data = JSON.parse(json);
 var vue_ranking = new Vue({

@@ -33,8 +33,8 @@ class GameScene extends Phaser.Scene{
         console.log("Array inicial: " + arraycards);
         this.cameras.main.setBackgroundColor(0xBFFCFF);
 
-        this.add.text(25, 50, "Is playing: " + this.name, {fontFamily: 'Brush Script MT', fontSize: '25px', fill: '#000'});
-        this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'Brush Script MT', fontSize: '25px', fill: '#000'});
+        this.add.text(25, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
         //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
 
         // Generate the Array of duplicate cards
@@ -68,7 +68,7 @@ class GameScene extends Phaser.Scene{
 		}
 
         // Cards Physics are static
-        this.cards_play = this.physics.add.staticGroup();
+        this.cards = this.physics.add.staticGroup();
 
         // Show cards turned over
         setTimeout(() => {
@@ -91,7 +91,7 @@ class GameScene extends Phaser.Scene{
         // Gameplay of the game [clicks, loose, win and score]
         let i = 0;
         this.cards.children.iterate((card)=>{
-            card.card_id = this.cards_play[i];
+            card.card_id = GeneratedArray[i];
             i++;
             card.setInteractive();
             card.on('pointerup', ()=> {
