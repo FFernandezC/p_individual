@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="../styles/ranking.css">
-		<!-- <script src="../js/loader.js"></script> -->
+		<script src="../js/loader.js"></script>
 		<title> Ranking </title>
 	</head>
 	<body>
@@ -10,13 +10,24 @@
 
         <div id="taula">
 
-            <!-- Ranking de scores FORMAT: [nom | puntuació] -->
+            <table class="table table-bordered">
+				<thead>
+					<th>
+						<td> Name Player </td>
+						<td> Score </td>
+					</th>
+				</thead>
+				
+				<tr v-for="score in p_scores[0]">
+					<td v-for="infScore">{{p_scores[score]}}</td>
+				</tr>
+			</table>
 
         </div>
 
         <button class="menu-object" v-on:click="exit_menu"> Torna </button>
 
 	</body>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
-	<!-- <script src="../js/game_controller.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+	<script src="../js/ranking.js"></script>
 </html>

@@ -24,7 +24,6 @@ var options = function(){
 			this.num = options_data.cards;
 			this.dificulty = options_data.dificulty;
 			this.mode_2 = options_data.mode_2;
-			
 		},
 		watch: {
 			num: function(value){
@@ -65,16 +64,12 @@ var options = function(){
 		},
 		getDificulty: function (){
 			return options_data.dificulty;
+		},
+		getMode2: function (){
+			return options_data.mode_2;
 		}
 	}; 
 }();
-
-/*
-console.log(options.getOptionsString());
-console.log(options.getNumOfCards());
-console.log(options.getDificulty());
-console.log(options.options_data);
-*/
 
 
 
