@@ -76,52 +76,56 @@ class GameScene extends Phaser.Scene{
             x = 150;
             while (loop_back < this.options_data.cards*2) {
                 if (loop_back < 6){
-                    this.add.image(x, 200, 'back');
+                    this.cards.create(x, 200, 'back');
                 }else if (loop_back == 6){
                     x = 150;
-                    this.add.image(x, 350, 'back');
+                    this.cards.create(x, 350, 'back');
                 }else if (loop_back > 6){
-                    this.add.image(x, 350, 'back');
+                    this.cards.create(x, 350, 'back');
                 }
                 loop_back++;
                 x+=100;
             }
-        }, temps);
+        
+            // Gameplay of the game [clicks, loose, win and score]
+            let i = 0;
+            this.cards.children.iterate((card)=>{
+                card.card_id = GeneratedArray[i];
+                i++;
+                card.setInteractive();
+                card.on('pointerup', ()=> {
+                    if(this.PlayEnded != true){
+                        card.disableBody(true, true);
+                        if (this.firstClick){
+                            if (this.firstClick.card_id !== card.card_id){
+                                card.disableBody(true, true);
+                                this.score -= points;
 
-        // Gameplay of the game [clicks, loose, win and score]
-        let i = 0;
-        this.cards.children.iterate((card)=>{
-            card.card_id = GeneratedArray[i];
-            i++;
-            card.setInteractive();
-            card.on('pointerup', ()=> {
-                if(this.PlayEnded != true){
-                    card.disableBody(true, true);
-                    if (this.firstClick){
-                        if (this.firstClick.card_id !== card.card_id){
-                            this.score -= points;
-                            Textsc.setText('Score: ' + this.score);
-                            this.firstClick.enableBody(false, 0, 0, true, true);
-                            card.enableBody(false, 0, 0, true, true);
-                            if (this.score <= 0){
-                                alert("Game Over");
-                                Textsc.setText('Score: 0')
-                                loadpage("../")
+                                setTimeout(() => {
+                                    this.firstClick.enableBody(false, 0, 0, true, true);
+                                    card.enableBody(false, 0, 0, true, true);
+								}, 500);
+
+                                if (this.score <= 0){
+                                    alert("Game Over");
+                                    this.score = 0;
+                                    loadpage("../");
+                                }
                             }
-                        }
-                        else{
-                            this.correct++;
-                            if (this.correct >= 2){
-                                alert("You Win with " + this.score + " points.");
-                                loadpage("../")
+                            else{
+                                this.correct++;
+                                if (this.correct >= this.options_data.cards){
+                                    alert("You Win with " + this.score + " points.");
+                                    loadpage("../")
+                                }
                             }
+                            this.firstClick = null;
+                        }else{
+                            this.firstClick = card;
                         }
-                        this.firstClick = null;
-                    }else{
-                        this.firstClick = card;
                     }
-                }
-            }, card);
-        });
+                }, card);
+            });
+        }, temps);
     }
 }
