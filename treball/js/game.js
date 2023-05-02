@@ -34,7 +34,7 @@ class GameScene extends Phaser.Scene{
         this.cameras.main.setBackgroundColor(0xBFFCFF);
 
         this.add.text(25, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
-        this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        let ScoreText = this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
         //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
 
         // Generate the Array of duplicate cards
@@ -100,23 +100,30 @@ class GameScene extends Phaser.Scene{
                             if (this.firstClick.card_id !== card.card_id){
                                 card.disableBody(true, true);
                                 this.score -= points;
+                                ScoreText.setText("Score: " + this.score)
+                                let firstCard = this.firstClick
 
                                 setTimeout(() => {
-                                    this.firstClick.enableBody(false, 0, 0, true, true);
+                                    firstCard.enableBody(false, 0, 0, true, true);
                                     card.enableBody(false, 0, 0, true, true);
-								}, 500);
+								}, 750);
 
                                 if (this.score <= 0){
-                                    alert("Game Over");
                                     this.score = 0;
-                                    loadpage("../");
+                                    setTimeout(() => {
+                                        alert("Game Over");
+                                        loadpage("../")
+                                    }, 200);
                                 }
                             }
                             else{
                                 this.correct++;
                                 if (this.correct >= this.options_data.cards){
-                                    alert("You Win with " + this.score + " points.");
-                                    loadpage("../")
+                                    card.disableBody(true, true);
+                                    setTimeout(() => {
+                                        alert("You Win with " + this.score + " points.");
+                                        loadpage("../")
+                                    }, 200);
                                 }
                             }
                             this.firstClick = null;
