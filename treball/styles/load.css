@@ -1,4 +1,4 @@
-/* CSS Ranking */
+/* CSS Load */
 
 body{
 	background-color: #2e2e2e;
@@ -11,7 +11,37 @@ body{
 	color: white;
 }
 
+/*--- TABLE ---*/
 
+#taula_games{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 3rem;
+	margin-bottom: 4rem;
+}
+
+table{
+	border-collapse: collapse;
+	width: 55%;
+	text-align: center;
+}
+
+#tdParent {
+  background-color: #2963ce;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Georgia";
+}
+
+td{
+	background-color: #f2f2f2;
+	padding: 10px;
+	font-size: 1.2rem;
+	font-family: "Georgia";
+}
 
 /*--- BUTTONS ---*/
 

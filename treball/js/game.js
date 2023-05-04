@@ -29,7 +29,7 @@ class GameScene extends Phaser.Scene{
         else{points = 30; temps = 1000;}
 
         /* Array with cards state*/
-        var cardsUpDown = new Array(this.options_data.cards*2);
+        var cardsUpDown = new Array(this.options_data.cards*2).fill(false);
 
         /* Array of shuffled cards and background color */
         let arraycards = ['cb','co','sb','so','tb','to'];
@@ -123,8 +123,17 @@ class GameScene extends Phaser.Scene{
                             else{
                                 this.correct++;
                                 /* UPDATE State of card position */
-                                cardsUpDown[this.firstClick.card_id] = true;
-                                cardsUpDown[card.card_id] = true;
+                                let loopSave = 0;
+                                while ( loopSave < this.options_data.cards*2) {
+                                    console.log(loopSave)
+                                    console.log(this.options_data.cards*2)
+                                    if(GeneratedArray[loopSave] == this.firstClick.card_id){
+                                        cardsUpDown[loopSave]=true;
+                                        loopSave += 1;
+                                    }else{
+                                        loopSave += 1;
+                                    }
+                                }
 
                                 if (this.correct >= this.options_data.cards){
                                     card.disableBody(true, true);

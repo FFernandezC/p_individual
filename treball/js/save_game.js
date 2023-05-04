@@ -1,6 +1,6 @@
 "use strict";
 var gamesForLoad = function(){
-    var vue_ranking = new Vue({
+    var vue_saves = new Vue({
         el: "#taula_games",
         data: {
             p_GamesLoad:[]
@@ -8,9 +8,9 @@ var gamesForLoad = function(){
         created: function(){
             let arrayGames = [];
 
-            if(localStorage.games)
+            if(localStorage.saves)
             {
-                arrayGames = JSON.parse(localStorage.games);
+                arrayGames = JSON.parse(localStorage.saves);
                 if(!Array.isArray(arrayGames)){arrayGames = [];}
             }
             this.p_GamesLoad = arrayGames;
