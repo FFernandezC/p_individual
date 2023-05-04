@@ -132,8 +132,7 @@ class GameScene extends Phaser.Scene{
                                     }                                   
                                     arraytemp.push(DataRanking);
                                     localStorage.ranking = JSON.stringify(arraytemp);
-                                    
-                                    console.log("entro");
+
                                     setTimeout(() => {
                                         alert("You Win with " + this.score + " points.");
                                         loadpage("../")
