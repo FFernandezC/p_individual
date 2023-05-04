@@ -18,6 +18,9 @@ var gamesForLoad = function(){
         methods: { 
             back: function(){
                 loadpage("../");
+            },
+            loadGame: function(){
+                loadpage("game.html");
             }
         }
     });
