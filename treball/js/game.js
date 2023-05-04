@@ -8,6 +8,7 @@ class GameScene extends Phaser.Scene{
         this.score = 100;
         this.correct = 0;
         this.PlayEnded = false;
+        this.keyboardSave = null;
         this.name = prompt("Username") || "[ ]";
 		this.options_data = JSON.parse(localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}');
     }
@@ -36,25 +37,25 @@ class GameScene extends Phaser.Scene{
         console.log("Array inicial: " + arraycards);
         this.cameras.main.setBackgroundColor(0xBFFCFF);
 
-        this.add.text(75, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
-        const SaveGame = this.add.text(350, 440, 'Save Game', {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000', backgroundColor: "deepskyblue"}).setInteractive().on('pointerdown', () => this.guardar(this.name, this.score, GeneratedArray, cardsUpDown));
-        let ScoreText = this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
-        //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
-
         // Generate the Array of duplicate cards
         let Generator_1 = 0, card_pos = 0;
         let GeneratedArray = [];
         while (Generator_1 < this.options_data.cards) {
-			GeneratedArray.push(arraycards[card_pos]);
             GeneratedArray.push(arraycards[card_pos]);
-			card_pos++;
-			Generator_1++;
-		}
+            GeneratedArray.push(arraycards[card_pos]);
+            card_pos++;
+            Generator_1++;
+        }
         
         console.log("Array duplidada: " + GeneratedArray);
         // Shuffle the cards inside the Array
         GeneratedArray = Phaser.Utils.Array.Shuffle(GeneratedArray);
         console.log("Array definitiva Barejada: " + GeneratedArray);
+
+        this.add.text(75, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        const SaveGame = this.add.text(350, 440, 'Save Game', {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000', backgroundColor: "deepskyblue"}).setInteractive().on('pointerdown', () => this.guardar(this.name, this.score, GeneratedArray, cardsUpDown));
+        let ScoreText = this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
 
         // Show all cards on screen
         let show_cards = 0, x = 150, linia = 0;
@@ -154,9 +155,8 @@ class GameScene extends Phaser.Scene{
                     }
                 }, card);
             });
-        }, temps);
+        }, temps);        
     }
-
     guardar(name, score, cards, cardsUpDown){
         var DataGuardarPartida = {
             NomPlayer: name,
