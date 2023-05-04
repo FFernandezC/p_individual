@@ -27,13 +27,17 @@ class GameScene extends Phaser.Scene{
         else if(this.options_data.dificulty == "normal"){points = 20; temps = 2000;}
         else{points = 30; temps = 1000;}
 
+        /* Array with cards state*/
+        var cardsUpDown = new Array(this.options_data.cards*2);
+
         /* Array of shuffled cards and background color */
         let arraycards = ['cb','co','sb','so','tb','to'];
         //[I]: Inforation of [Phaser.Utils.Array.Shuffle] in: https://newdocs.phaser.io/docs/3.55.2/focus/Phaser.Utils.Array.Shuffle
         console.log("Array inicial: " + arraycards);
         this.cameras.main.setBackgroundColor(0xBFFCFF);
 
-        this.add.text(25, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        this.add.text(75, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        const SaveGame = this.add.text(350, 440, 'Save Game', {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000', backgroundColor: "deepskyblue"}).setInteractive().on('pointerdown', () => this.guardar(this.name, this.score, GeneratedArray, cardsUpDown));
         let ScoreText = this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
         //[I] Information of [this.add.text] in: https://photonstorm.github.io/phaser3-docs/Phaser.GameObjects.Text.html
 
@@ -102,7 +106,6 @@ class GameScene extends Phaser.Scene{
                                 this.score -= points;
                                 ScoreText.setText("Score: " + this.score)
                                 let firstCard = this.firstClick
-
                                 setTimeout(() => {
                                     firstCard.enableBody(false, 0, 0, true, true);
                                     card.enableBody(false, 0, 0, true, true);
@@ -118,6 +121,10 @@ class GameScene extends Phaser.Scene{
                             }
                             else{
                                 this.correct++;
+                                /* UPDATE State of card position */
+                                cardsUpDown[this.firstClick.card_id] = true;
+                                cardsUpDown[card.card_id] = true;
+
                                 if (this.correct >= this.options_data.cards){
                                     card.disableBody(true, true);
 
@@ -143,9 +150,27 @@ class GameScene extends Phaser.Scene{
                         }else{
                             this.firstClick = card;
                         }
+                        console.log(cardsUpDown);
                     }
                 }, card);
             });
         }, temps);
+    }
+
+    guardar(name, score, cards, cardsUpDown){
+        var DataGuardarPartida = {
+            NomPlayer: name,
+            ScorePlayer: score,
+            CardsGame: cards,
+            CardsState: cardsUpDown
+        };
+        var arraytempSave = [];
+        if(localStorage.saves){
+            arraytempSave = JSON.parse(localStorage.saves);
+            if(!Array.isArray(arraytempSave)){arraytempSave = [];}
+        }                                   
+        arraytempSave.push(DataGuardarPartida);
+        localStorage.saves = JSON.stringify(arraytempSave);
+        console.log("Array guardada: " + DataGuardarPartida.CardsState);
     }
 }

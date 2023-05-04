@@ -12,6 +12,10 @@ function options(){
 	loadpage("./html/options.html");
 }
 
+function loadPlay(){
+	loadpage("./html/load.html");
+}
+
 function exit(){
 	if (name != ""){
 		alert("Leaving " + name + "'s game");

@@ -56,12 +56,12 @@ button.menu-object:hover:not(:active){
 }
 
 .buton{
-	display:block;
+	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 0.5rem;
 	padding: 1rem 3rem;
-	width: 7rem;
+	width: 10rem;
 	background-color: #0080FF;
 	border-radius: 2rem 2rem 2rem 2rem;
 	text-align: center;
