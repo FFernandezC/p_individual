@@ -12,6 +12,7 @@ class GameScene extends Phaser.Scene{
         this.name = prompt("Username") || "[ ]";
 		this.options_data = JSON.parse(localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}');
         this.saveGames = JSON.parse(localStorage.getItem("saves"));
+        this.loadGames = JSON.parse(localStorage.getItem("load"));
     }
     preload () {
         this.load.image('back', '../resources/back.png');
@@ -24,35 +25,47 @@ class GameScene extends Phaser.Scene{
     }
     create () {
 
-        let points = 0, temps = 0;
-        if(this.options_data.dificulty == "easy"){points = 10; temps = 3000;}
-        else if(this.options_data.dificulty == "normal"){points = 20; temps = 2000;}
-        else{points = 30; temps = 1000;}
 
-        /* Array with cards state*/
-        var cardsUpDown = new Array(this.options_data.cards*2).fill(false);
+        //Borra elements de l'array
+        //array.splice(index,numero de element a eliminar)
 
-        /* Array of shuffled cards and background color */
-        let arraycards = ['cb','co','sb','so','tb','to'];
-        //[I]: Inforation of [Phaser.Utils.Array.Shuffle] in: https://newdocs.phaser.io/docs/3.55.2/focus/Phaser.Utils.Array.Shuffle
-        console.log("Array inicial: " + arraycards);
-        this.cameras.main.setBackgroundColor(0xBFFCFF);
+        if(this.loadGames)
+        {
+            points = this.loadGames.ScorePlayer;
+            this.name = this.loadGames.NomPlayer;
+            GeneratedArray = this.loadGames.CardsGame;
 
-        // Generate the Array of duplicate cards
-        let Generator_1 = 0, card_pos = 0;
-        let GeneratedArray = [];
-        while (Generator_1 < this.options_data.cards) {
-            GeneratedArray.push(arraycards[card_pos]);
-            GeneratedArray.push(arraycards[card_pos]);
-            card_pos++;
-            Generator_1++;
         }
-        
-        console.log("Array duplidada: " + GeneratedArray);
-        // Shuffle the cards inside the Array
-        GeneratedArray = Phaser.Utils.Array.Shuffle(GeneratedArray);
-        console.log("Array definitiva Barejada: " + GeneratedArray);
+        else{
+            let points = 0, temps = 0;
+            if(this.options_data.dificulty == "easy"){points = 10; temps = 3000;}
+            else if(this.options_data.dificulty == "normal"){points = 20; temps = 2000;}
+            else{points = 30; temps = 1000;}
 
+            /* Array with cards state*/
+            var cardsUpDown = new Array(this.options_data.cards*2).fill(false);
+
+            /* Array of shuffled cards and background color */
+            let arraycards = ['cb','co','sb','so','tb','to'];
+            //[I]: Inforation of [Phaser.Utils.Array.Shuffle] in: https://newdocs.phaser.io/docs/3.55.2/focus/Phaser.Utils.Array.Shuffle
+            console.log("Array inicial: " + arraycards);
+            
+            // Generate the Array of duplicate cards
+            let Generator_1 = 0, card_pos = 0;
+            let GeneratedArray = [];
+            while (Generator_1 < this.options_data.cards) {
+                GeneratedArray.push(arraycards[card_pos]);
+                GeneratedArray.push(arraycards[card_pos]);
+                card_pos++;
+                Generator_1++;
+            }   
+            console.log("Array duplidada: " + GeneratedArray);
+            // Shuffle the cards inside the Array
+            GeneratedArray = Phaser.Utils.Array.Shuffle(GeneratedArray);
+            console.log("Array definitiva Barejada: " + GeneratedArray);
+        }
+
+        this.cameras.main.setBackgroundColor(0xBFFCFF);
         this.add.text(75, 50, "Is playing: " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
         const SaveGame = this.add.text(350, 440, 'Save Game', {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000', backgroundColor: "deepskyblue"}).setInteractive().on('pointerdown', () => this.guardar(this.name, this.score, GeneratedArray, cardsUpDown));
         let ScoreText = this.add.text(575, 50, "Score: " + this.score, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
@@ -75,6 +88,12 @@ class GameScene extends Phaser.Scene{
 
         // Cards Physics are static
         this.cards = this.physics.add.staticGroup();
+
+        if(this.loadGames){
+
+        }else{
+            
+        }
 
         // Show cards turned over
         setTimeout(() => {
@@ -165,6 +184,7 @@ class GameScene extends Phaser.Scene{
             });
         }, temps);        
     }
+
     guardar(name, score, cards, cardsUpDown){
         var DataGuardarPartida = {
             NomPlayer: name,
