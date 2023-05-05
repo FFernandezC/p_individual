@@ -11,6 +11,8 @@ class GameScene extends Phaser.Scene{
         this.keyboardSave = null;
         this.name = prompt("Username") || "[ ]";
 		this.options_data = JSON.parse(localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}');
+        this.saveGames = JSON.parse(localStorage.getItem("saves"));
+        this.arrPartides = [];
     }
     preload () {
         this.load.image('back', '../resources/back.png');
@@ -172,28 +174,39 @@ class GameScene extends Phaser.Scene{
             CardsState: cardsUpDown
         };
         // If the player already has a game, it overwrites it
-        var saves_json = JSON.parse(localStorage.getItem("saves"));
-        
-        var arr = [];
-        arr = saves_json;
 
-        var loopSearch = 0;
+        var loopSearch = 0, pos = 0;
         var trobat = false;
-
-        while(!trobat)
-        {console.log("L:" + loopSearch)
-            if(arr[loopSearch].NomPlayer == name){
-                trobat = true;
-                break;
-            }
-            else{
-                
-                if(loopSearch == arr.length-1){
+        console.log("-: " + this.arrPartides.length)
+        
+        if(this.arrPartides.length != 0){
+            this.arrPartides = this.saveGames; 
+        }
+        
+        if(this.arrPartides.length != 0)
+        {
+            while(trobat != true)
+            {
+                if(this.arrPartides[loopSearch] == null){
+                    console.log("break");
                     break;
                 }
-                loopSearch++;
-            }    
+                else if(this.arrPartides[loopSearch].NomPlayer == name){
+                    trobat = true;
+                    pos = loopSearch;
+                    console.log("pos: " + pos);
+                    break;
+                }
+                else{
+                    console.log("loop");
+                    if(loopSearch == this.arrPartides.length-1){
+                        break;
+                    }
+                    loopSearch++;
+                }    
+            }
         }
+        console.log("Trobat: " + trobat)
 
         if(trobat == false)
         {
@@ -204,7 +217,6 @@ class GameScene extends Phaser.Scene{
             }
             arraytempSave.push(DataGuardarPartida);
             localStorage.saves = JSON.stringify(arraytempSave);
-            console.log("IndexOf: " + saves_json.indexOf(DataGuardarPartida.NomPlayer));
         }
         else
         {
@@ -213,9 +225,9 @@ class GameScene extends Phaser.Scene{
                 arraytempSave = JSON.parse(localStorage.saves);
                 if(!Array.isArray(arraytempSave)){arraytempSave = [];}
             }
-            arraytempSave[loopSearch] = DataGuardarPartida;
+            arraytempSave[pos] = DataGuardarPartida;
             localStorage.saves = JSON.stringify(arraytempSave);
-            console.log("IndexOf: " + saves_json.indexOf(DataGuardarPartida.NomPlayer));
-        }                                   
+        }
+                                 
     }
 }
