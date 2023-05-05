@@ -125,8 +125,6 @@ class GameScene extends Phaser.Scene{
                                 /* UPDATE State of card position */
                                 let loopSave = 0;
                                 while ( loopSave < this.options_data.cards*2) {
-                                    console.log(loopSave)
-                                    console.log(this.options_data.cards*2)
                                     if(GeneratedArray[loopSave] == this.firstClick.card_id){
                                         cardsUpDown[loopSave]=true;
                                         loopSave += 1;
@@ -173,13 +171,51 @@ class GameScene extends Phaser.Scene{
             CardsGame: cards,
             CardsState: cardsUpDown
         };
-        var arraytempSave = [];
-        if(localStorage.saves){
-            arraytempSave = JSON.parse(localStorage.saves);
-            if(!Array.isArray(arraytempSave)){arraytempSave = [];}
+        // If the player already has a game, it overwrites it
+        var saves_json = JSON.parse(localStorage.getItem("saves"));
+        
+        var arr = [];
+        arr = saves_json;
+
+        var loopSearch = 0;
+        var trobat = false;
+
+        while(!trobat)
+        {console.log("L:" + loopSearch)
+            if(arr[loopSearch].NomPlayer == name){
+                trobat = true;
+                break;
+            }
+            else{
+                
+                if(loopSearch == arr.length-1){
+                    break;
+                }
+                loopSearch++;
+            }    
+        }
+
+        if(trobat == false)
+        {
+            var arraytempSave = [];
+            if(localStorage.saves){
+                arraytempSave = JSON.parse(localStorage.saves);
+                if(!Array.isArray(arraytempSave)){arraytempSave = [];}
+            }
+            arraytempSave.push(DataGuardarPartida);
+            localStorage.saves = JSON.stringify(arraytempSave);
+            console.log("IndexOf: " + saves_json.indexOf(DataGuardarPartida.NomPlayer));
+        }
+        else
+        {
+            var arraytempSave = [];
+            if(localStorage.saves){
+                arraytempSave = JSON.parse(localStorage.saves);
+                if(!Array.isArray(arraytempSave)){arraytempSave = [];}
+            }
+            arraytempSave[loopSearch] = DataGuardarPartida;
+            localStorage.saves = JSON.stringify(arraytempSave);
+            console.log("IndexOf: " + saves_json.indexOf(DataGuardarPartida.NomPlayer));
         }                                   
-        arraytempSave.push(DataGuardarPartida);
-        localStorage.saves = JSON.stringify(arraytempSave);
-        console.log("Array guardada: " + DataGuardarPartida.CardsState);
     }
 }
