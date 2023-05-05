@@ -3,7 +3,8 @@ var gamesForLoad = function(){
     var vue_saves = new Vue({
         el: "#taula_games",
         data: {
-            p_GamesLoad:[]
+            p_GamesLoad:[],
+            GameToLoad: 0
         },
         created: function(){
             let arrayGames = [];
@@ -20,7 +21,14 @@ var gamesForLoad = function(){
                 loadpage("../");
             },
             loadGame: function(){
-                loadpage("game.html");
+                var savesG = localStorage.getItem("saves");
+                var savesGames = JSON.parse(savesG);
+
+                
+
+                //valor
+                console.log(this.GameToLoad);
+                //loadpage("game.html");
             }
         }
     });

@@ -16,7 +16,7 @@
 				</thead>
 				<tr v-for="Game in p_GamesLoad">
 					<td>
-						<input type="radio" id="{{Game.NomPlayer}}" name="GameToLoad" value="{{Game.NomPlayer}}">
+						<input type="radio" :id="Game.NomPlayer" :value="Game.NomPlayer" v-model="GameToLoad">
 					</td>
 					<td>{{Game.NomPlayer}}</td>
 					<td>{{Game.ScorePlayer}}</td>

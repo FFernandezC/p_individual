@@ -12,7 +12,6 @@ class GameScene extends Phaser.Scene{
         this.name = prompt("Username") || "[ ]";
 		this.options_data = JSON.parse(localStorage.getItem("config") || '{"cards":2,"dificulty":"easy","mode_2":"mode_easy"}');
         this.saveGames = JSON.parse(localStorage.getItem("saves"));
-        this.arrPartides = [];
     }
     preload () {
         this.load.image('back', '../resources/back.png');
@@ -93,7 +92,7 @@ class GameScene extends Phaser.Scene{
                 loop_back++;
                 x+=100;
             }
-        
+
             // Gameplay of the game [clicks, loose, win and score]
             let i = 0;
             this.cards.children.iterate((card)=>{
@@ -177,33 +176,23 @@ class GameScene extends Phaser.Scene{
 
         var loopSearch = 0, pos = 0;
         var trobat = false;
-        console.log("-: " + this.arrPartides.length)
         
-        if(this.arrPartides.length != 0){
-            this.arrPartides = this.saveGames; 
-        }
-        
-        if(this.arrPartides.length != 0)
+        //this.arrPartides = this.saveGames;
+
+        if(this.saveGames)
         {
-            while(trobat != true)
+            while(trobat != true && loopSearch < this.saveGames.length)
             {
-                if(this.arrPartides[loopSearch] == null){
-                    console.log("break");
-                    break;
-                }
-                else if(this.arrPartides[loopSearch].NomPlayer == name){
+                if(this.saveGames[loopSearch].NomPlayer == name){
                     trobat = true;
                     pos = loopSearch;
                     console.log("pos: " + pos);
-                    break;
                 }
                 else{
-                    console.log("loop");
-                    if(loopSearch == this.arrPartides.length-1){
-                        break;
-                    }
-                    loopSearch++;
-                }    
+                    console.log(this.saveGames[loopSearch].NomPlayer + " - " + name)
+                }
+                loopSearch++;
+                console.log("loop: " + loopSearch)
             }
         }
         console.log("Trobat: " + trobat)
@@ -228,6 +217,10 @@ class GameScene extends Phaser.Scene{
             arraytempSave[pos] = DataGuardarPartida;
             localStorage.saves = JSON.stringify(arraytempSave);
         }
-                                 
+                 
+        setTimeout(() => {
+            this.add.text(326, 400, "Game Saved! " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
+        }, 200);
+
     }
 }
