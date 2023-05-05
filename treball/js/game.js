@@ -177,8 +177,6 @@ class GameScene extends Phaser.Scene{
         var loopSearch = 0, pos = 0;
         var trobat = false;
         
-        //this.arrPartides = this.saveGames;
-
         if(this.saveGames)
         {
             while(trobat != true && loopSearch < this.saveGames.length)
@@ -187,9 +185,6 @@ class GameScene extends Phaser.Scene{
                     trobat = true;
                     pos = loopSearch;
                     console.log("pos: " + pos);
-                }
-                else{
-                    console.log(this.saveGames[loopSearch].NomPlayer + " - " + name)
                 }
                 loopSearch++;
                 console.log("loop: " + loopSearch)
@@ -220,7 +215,11 @@ class GameScene extends Phaser.Scene{
                  
         setTimeout(() => {
             this.add.text(326, 400, "Game Saved! " + this.name, {fontFamily: 'New Century Schoolbook', fontSize: '25px', fill: '#000'});
-        }, 200);
+        }, 500);
+
+        setTimeout(() => {
+            loadpage("../");
+        }, 2000);
 
     }
 }

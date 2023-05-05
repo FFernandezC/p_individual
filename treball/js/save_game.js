@@ -4,7 +4,8 @@ var gamesForLoad = function(){
         el: "#taula_games",
         data: {
             p_GamesLoad:[],
-            GameToLoad: 0
+            GameToLoad: 0,
+            saveGames: JSON.parse(localStorage.getItem("saves"))
         },
         created: function(){
             let arrayGames = [];
@@ -20,15 +21,30 @@ var gamesForLoad = function(){
             back: function(){
                 loadpage("../");
             },
-            loadGame: function(){
-                var savesG = localStorage.getItem("saves");
-                var savesGames = JSON.parse(savesG);
+            loadGame: function(){ 
+                console.log("entro")
+                var loopSearch = 0, pos = 0;
+                var trobat = false;
 
-                
-
-                //valor
-                console.log(this.GameToLoad);
-                //loadpage("game.html");
+                if(this.saveGames)
+                {
+                    while(trobat != true && loopSearch < this.saveGames.length)
+                    {
+                        if(this.saveGames[loopSearch].NomPlayer == this.GameToLoad){
+                            trobat = true;
+                            pos = loopSearch;
+                        }
+                        loopSearch++;
+                    }
+                }
+                var arraytempLoad = [];
+                if(localStorage.load){
+                    arraytempLoad = JSON.parse(localStorage.load);
+                    if(!Array.isArray(arraytempLoad)){arraytempLoad = [];}
+                }
+                arraytempLoad[0] = this.saveGames[pos];
+                localStorage.load = JSON.stringify(arraytempLoad);
+                loadpage("game.html");
             }
         }
     });
