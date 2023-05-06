@@ -17,12 +17,8 @@ function loadPlay(){
 }
 
 function exit(){
-	if (name != ""){
-		alert("Leaving " + name + "'s game");
-	}
-	name = "";
 	//Sortir al index.html principal
-	loadpage("../index.html");
+	loadpage("./../index.html");
 }
 
 
